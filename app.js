@@ -19,7 +19,7 @@ function updateDisplay(currentElapsed) {
 
 function startRandomTimer() {
     console.log('Start button clicked'); // Debug
-    const randomSeconds = (Math.random() * 14.79) + 0.20; // 0.20–14.99s (hidden)
+    const randomSeconds = (Math.random() * 14.49) + 0.50; // 0.50–14.99s (hidden, min for sync buffer)
     startTime = Date.now();
     endTime = startTime + (randomSeconds * 1000); // Secret expiration—known ahead
     document.getElementById('startBtn').textContent = 'Running...';
@@ -42,8 +42,8 @@ function startRandomTimer() {
         const elapsed = (currentTime - startTime) / 1000;
         updateDisplay(elapsed);
         
-        // Frontload audio ~500ms early (hidden—syncs sound to exact visual flash on iOS)
-        const audioLeadTime = 500; // Adjusted for iOS latency
+        // Frontload audio ~750ms early (hidden—syncs sound to exact visual flash on iOS)
+        const audioLeadTime = 750; // Nudged for extra 1/4s latency
         if (currentTime >= endTime - audioLeadTime && buzzerSound.paused) {
             buzzerSound.play(); // Starts early—buzzer peaks at flash
             console.log('Audio frontloaded', audioLeadTime + 'ms early');
