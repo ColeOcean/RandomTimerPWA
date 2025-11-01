@@ -22,6 +22,7 @@ function startRandomTimer() {
     const randomSeconds = (Math.random() * 14.49) + 0.50; // 0.50–14.99s (hidden, min for sync buffer)
     startTime = Date.now();
     endTime = startTime + (randomSeconds * 1000); // Secret expiration—known ahead
+    document.body.classList.add('running'); // Hide version
     document.getElementById('startBtn').textContent = 'Running...';
     document.getElementById('startBtn').disabled = true;
     document.getElementById('resetBtn').style.display = 'inline-block';
@@ -60,6 +61,7 @@ function resetTimer() {
     if (timerInterval) {
         clearInterval(timerInterval);
     }
+    document.body.classList.remove('running'); // Show version
     document.getElementById('startBtn').textContent = 'Start Timer';
     document.getElementById('startBtn').disabled = false;
     document.getElementById('timerDisplay').textContent = '00:00.00';
@@ -81,6 +83,7 @@ function alertUser() {
     }, 3000);
 
     setTimeout(() => {
+        document.body.classList.remove('running'); // Show version after reset
         document.getElementById('startBtn').textContent = 'Start Timer';
         document.getElementById('startBtn').disabled = false;
         document.getElementById('resetBtn').style.display = 'none';

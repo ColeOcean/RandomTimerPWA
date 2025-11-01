@@ -18,6 +18,14 @@
         }
         h1 { color: #ffffff; margin-bottom: 10px; }
         p { color: #cccccc; margin-bottom: 20px; }
+        #version { 
+            font-size: 12px; 
+            color: #666; 
+            text-align: right; 
+            margin-right: 20px; 
+            opacity: 0.7; /* Subtle */
+        }
+        .running #version { display: none; } /* Hide during timer */
         button { 
             padding: 15px 30px; 
             font-size: 18px; 
@@ -87,6 +95,7 @@
 <body>
     <h1>Papa's Buzzer Beater</h1>
     <p>Are you the fastest buzzer in the fam?</p>
+    <div id="version">v1.21</div>
     <button id="startBtn">Start Timer</button>
     <button id="resetBtn">Reset</button>
     <div class="timer-container">
