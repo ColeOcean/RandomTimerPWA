@@ -42,9 +42,9 @@ function startRandomTimer() {
         const elapsed = (currentTime - startTime) / 1000;
         updateDisplay(elapsed);
         
-        // Frontload audio ~200ms early (hidden—syncs sound to exact visual flash)
-        const audioLeadTime = 200; // ms before endTime to start playback
-        if (currentTime >= endTime - audioLeadTime && !buzzerSound.playing) {
+        // Frontload audio ~500ms early (hidden—syncs sound to exact visual flash on iOS)
+        const audioLeadTime = 500; // Adjusted for iOS latency
+        if (currentTime >= endTime - audioLeadTime && buzzerSound.paused) {
             buzzerSound.play(); // Starts early—buzzer peaks at flash
             console.log('Audio frontloaded', audioLeadTime + 'ms early');
         }

@@ -11,27 +11,22 @@
         body { 
             font-family: Arial, sans-serif; 
             text-align: center; 
-            padding: clamp(0px, 2vw, 20px); /* Scales to 0 on narrow—no edge squeeze */
+            padding: clamp(0px, 1vw, 10px); /* Minimal edge space */
             background: #121212; 
             color: #ffffff; 
             margin: 0;
-            height: 100vh; /* Full height for consistent centering */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Vertical center overall */
-            align-items: center;
         }
         h1 { color: #ffffff; margin-bottom: 10px; }
         p { color: #cccccc; margin-bottom: 20px; }
         button { 
             padding: 15px 30px; 
-            font-size: clamp(14px, 2vw, 18px); /* Buttons scale too */
+            font-size: 18px; 
             background: #007bff; 
             color: #ffffff; 
             border: none; 
             border-radius: 5px; 
             cursor: pointer; 
-            margin: 5px;
+            margin: 10px;
             display: inline-block; 
             width: auto; 
         }
@@ -41,37 +36,36 @@
         }
         #resetBtn { 
             display: none; 
-            font-size: clamp(12px, 1.5vw, 14px); 
+            font-size: 14px; 
             padding: 10px 20px; 
             background: #dc3545; 
             border: none;
         }
-        /* Timer Container: Pure flex, no padding/bounds */
+        /* Timer Container: Pure center, no bounds */
         .timer-container {
             display: flex;
-            justify-content: center; /* Horizontal center */
-            align-items: center; /* Vertical center in container */
-            margin: clamp(10px, 5vw, 20px) auto; /* Responsive margin */
+            justify-content: center; 
+            margin: 20px auto;
             white-space: nowrap; 
             width: 100%; 
-            overflow: visible; /* Full freedom—no clip */
-            flex-grow: 1; /* Takes remaining space */
+            overflow: visible; 
+            min-height: 100px; 
         }
         #timerDisplay { 
             font-family: 'Orbitron', monospace; 
             font-weight: 900; 
-            font-size: clamp(48px, 20vw, 200px); /* Aggressive vw scale: Shrinks fast, fits edges */
+            font-size: clamp(48px, 15vw, 150px); /* Aggressive shrink: Fits 1250px at ~188px, scales down fast */
             margin: 0; 
             color: #00ff41; 
             text-shadow: 0 0 10px #00ff41; 
-            letter-spacing: 0.05em; /* Minimal spacing */
+            letter-spacing: 0.02em; /* Ultra-tight */
             line-height: 1; 
         }
-        /* Alert: Red, bigger pulse—scales free */
+        /* Alert: Red, bigger pulse */
         .alert #timerDisplay {
             color: #ff0000 !important;
             text-shadow: 0 0 20px #ff0000 !important; 
-            font-size: clamp(64px, 25vw, 256px); /* Slightly larger, but vw-tied */
+            font-size: clamp(64px, 20vw, 200px); /* Scales with vw */
             animation: led-pulse 0.3s infinite alternate;
         }
         @keyframes led-pulse {
