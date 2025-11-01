@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papa's Buzzer Beater</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: clamp(0px, 2vw, 20px); /* Scales to 0 on narrow—no edge squeeze */
+            background: #121212; 
+            color: #ffffff; 
+            margin: 0;
+            height: 100vh; /* Full height for consistent centering */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertical center overall */
+            align-items: center;
+        }
+        h1 { color: #ffffff; margin-bottom: 10px; }
+        p { color: #cccccc; margin-bottom: 20px; }
+        button { 
+            padding: 15px 30px; 
+            font-size: clamp(14px, 2vw, 18px); /* Buttons scale too */
+            background: #007bff; 
+            color: #ffffff; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px;
+            display: inline-block; 
+            width: auto; 
+        }
+        button:disabled { 
+            background: #1f1f1f; 
+            cursor: not-allowed;
+        }
+        #resetBtn { 
+            display: none; 
+            font-size: clamp(12px, 1.5vw, 14px); 
+            padding: 10px 20px; 
+            background: #dc3545; 
+            border: none;
+        }
+        /* Timer Container: Pure flex, no padding/bounds */
+        .timer-container {
+            display: flex;
+            justify-content: center; /* Horizontal center */
+            align-items: center; /* Vertical center in container */
+            margin: clamp(10px, 5vw, 20px) auto; /* Responsive margin */
+            white-space: nowrap; 
+            width: 100%; 
+            overflow: visible; /* Full freedom—no clip */
+            flex-grow: 1; /* Takes remaining space */
+        }
+        #timerDisplay { 
+            font-family: 'Orbitron', monospace; 
+            font-weight: 900; 
+            font-size: clamp(48px, 20vw, 200px); /* Aggressive vw scale: Shrinks fast, fits edges */
+            margin: 0; 
+            color: #00ff41; 
+            text-shadow: 0 0 10px #00ff41; 
+            letter-spacing: 0.05em; /* Minimal spacing */
+            line-height: 1; 
+        }
+        /* Alert: Red, bigger pulse—scales free */
+        .alert #timerDisplay {
+            color: #ff0000 !important;
+            text-shadow: 0 0 20px #ff0000 !important; 
+            font-size: clamp(64px, 25vw, 256px); /* Slightly larger, but vw-tied */
+            animation: led-pulse 0.3s infinite alternate;
+        }
+        @keyframes led-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.05); opacity: 0.9; }
+        }
+        .alert { 
+            animation: flash 0.5s infinite; 
+            background: #330000 !important; 
+            color: #ffffff; 
+        }
+        @keyframes flash { 
+            0% { opacity: 1; } 
+            50% { opacity: 0.5; } 
+            100% { opacity: 1; } 
+        }
+    </style>
+</head>
+<body>
+    <h1>Papa's Buzzer Beater</h1>
+    <p>Are you the fastest buzzer in the fam?</p>
+    <button id="startBtn">Start Timer</button>
+    <button id="resetBtn">Reset</button>
+    <div class="timer-container">
+        <div id="timerDisplay">00:00.00</div>
+    </div>
+    <audio id="buzzerSound" src="buzzer.mp3" preload="auto"></audio>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
